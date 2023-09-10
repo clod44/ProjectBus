@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c73ixjoguai4x"]
+
+[ext_resource type="Texture2D" uid="uid://cqsbra2yo8wjv" path="res://Assets/Textures/huge_grass3.png" id="1_ugfin"]
+[ext_resource type="PackedScene" uid="uid://n7uju4c8xmpb" path="res://Scenes/bus.tscn" id="2_gnykf"]
+[ext_resource type="PackedScene" uid="uid://cmrhtgypdx0m0" path="res://Scenes/camera.tscn" id="3_uw5jw"]
+[ext_resource type="PackedScene" uid="uid://bnev6mp42wqde" path="res://Scenes/civilian.tscn" id="4_bouqf"]
+[ext_resource type="PackedScene" uid="uid://c1wb3h0lybq8n" path="res://Scenes/civilian_spawner.tscn" id="4_hf7ru"]
+
+[sub_resource type="Environment" id="Environment_ber3h"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+glow_hdr_threshold = 0.66
+
+[node name="Game" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ber3h")
+
+[node name="Camera" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("3_uw5jw")]
+follow_node = NodePath("../Bus")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1290, 730)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_ugfin")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Bus" parent="." instance=ExtResource("2_gnykf")]
+
+[node name="CivilianSpawner" parent="." instance=ExtResource("4_hf7ru")]
+position = Vector2(385, -261)
+
+[node name="Civilian" parent="." instance=ExtResource("4_bouqf")]
+position = Vector2(359, 175)
+health = 100.0
+civilian_type = 0
+random_civilian_type = true

@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://n7uju4c8xmpb"]
+
+[ext_resource type="Script" path="res://Scripts/vehicle.gd" id="1_mim82"]
+[ext_resource type="PackedScene" uid="uid://bi2msp4erewla" path="res://Scenes/Effects/trail.tscn" id="2_qeaf7"]
+[ext_resource type="Texture2D" uid="uid://c52tlngjxphnu" path="res://Assets/Textures/Wheels/wheel_1.png" id="2_vk1gw"]
+[ext_resource type="Texture2D" uid="uid://cjeaqcj5fygal" path="res://Assets/Textures/Vehicles/bus_1.png" id="3_uuxwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5e3w"]
+size = Vector2(91.625, 379.375)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jj2l5"]
+radius = 196.499
+
+[node name="Bus" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 13
+mass = 1000.0
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+script = ExtResource("1_mim82")
+vehicle_speed = 1e+08
+steer_strength = 1e+10
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a5e3w")
+metadata/_edit_lock_ = true
+
+[node name="WheelFL" type="Sprite2D" parent="."]
+position = Vector2(-41, -118)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vk1gw")
+
+[node name="Trail" parent="WheelFL" instance=ExtResource("2_qeaf7")]
+force_follow_parent = true
+is_visible = true
+
+[node name="WheelFR" type="Sprite2D" parent="."]
+position = Vector2(41, -118)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vk1gw")
+
+[node name="Trail" parent="WheelFR" instance=ExtResource("2_qeaf7")]
+force_follow_parent = true
+is_visible = true
+
+[node name="WheelBL" type="Sprite2D" parent="."]
+position = Vector2(-42, 108)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vk1gw")
+
+[node name="Trail" parent="WheelBL" instance=ExtResource("2_qeaf7")]
+force_follow_parent = true
+is_visible = true
+
+[node name="WheelBR" type="Sprite2D" parent="."]
+position = Vector2(42, 108)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vk1gw")
+
+[node name="Trail" parent="WheelBR" instance=ExtResource("2_qeaf7")]
+force_follow_parent = true
+is_visible = true
+
+[node name="Vehicle" type="Sprite2D" parent="."]
+z_index = 1
+rotation = -1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("3_uuxwl")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jj2l5")
