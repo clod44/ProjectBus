@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfdu8mf3gspsd"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ysnwk"]
+[ext_resource type="PackedScene" uid="uid://0b2swoadgi4b" path="res://Scenes/gauge.tscn" id="2_lqvg7"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("rpm_gauge")]
+script = ExtResource("1_ysnwk")
+rpm_gauge = NodePath("SafeZones/RPMGauge")
+
+[node name="SafeZones" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RPMGauge" parent="SafeZones" instance=ExtResource("2_lqvg7")]
+position = Vector2(1149, 583)
+scale = Vector2(3, 3)
+max_value = 1.0

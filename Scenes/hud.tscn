@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfdu8mf3gspsd"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ysnwk"]
+[ext_resource type="PackedScene" uid="uid://0b2swoadgi4b" path="res://Scenes/gauge.tscn" id="2_lqvg7"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("gauge_1", "gauge_2")]
+script = ExtResource("1_ysnwk")
+gauge_1 = NodePath("SafeZones/Gauge1")
+gauge_2 = NodePath("SafeZones/Gauge2")
+
+[node name="SafeZones" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gauge1" parent="SafeZones" instance=ExtResource("2_lqvg7")]
+position = Vector2(1193.5, 356.25)
+scale = Vector2(2.04687, 2.00781)
+text_1 = "rpm:"
+max_value = 1000.0
+
+[node name="Gauge2" parent="SafeZones" instance=ExtResource("2_lqvg7")]
+position = Vector2(1120, 563)
+scale = Vector2(4, 4)
+text_1 = "kmph"
+max_value = 300.0

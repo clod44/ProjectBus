@@ -1,18 +1,18 @@
 extends Node
 
-signal player_updated
+signal vehicle_updated
 
 #world
 var camera = null
 
 var game_time_minutes :float = 720.0
-var game_time_minutes_speed := 100.0
+var game_time_minutes_speed := 1.0
 var sun_direction := Vector2.ZERO 
 
-var player = null :
+var vehicle = null :
 	set(value):
-		player = value
-		emit_signal("player_updated")
+		vehicle = value
+		emit_signal("vehicle_updated")
 
 
 func _process(delta):

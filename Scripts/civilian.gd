@@ -57,6 +57,10 @@ func take_damage(amount):
 
 
 func die():
+	$BloodFountain.emitting = true
+	$BloodLake.emitting = true
+	$BloodExplosion.emitting = true
+	$LightOccluder2D.visible = false
 	Global.camera.shake(1, 5)
 	is_dead = true
 	modulate = Color.RED

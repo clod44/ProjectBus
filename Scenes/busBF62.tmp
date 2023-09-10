@@ -1,11 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://n7uju4c8xmpb"]
+[gd_scene load_steps=20 format=3 uid="uid://n7uju4c8xmpb"]
 
 [ext_resource type="Script" path="res://Scripts/vehicle.gd" id="1_mim82"]
 [ext_resource type="PackedScene" uid="uid://bi2msp4erewla" path="res://Scenes/Effects/trail.tscn" id="2_qeaf7"]
 [ext_resource type="Texture2D" uid="uid://c52tlngjxphnu" path="res://Assets/Textures/Wheels/wheel_1.png" id="2_vk1gw"]
 [ext_resource type="Texture2D" uid="uid://cjeaqcj5fygal" path="res://Assets/Textures/Vehicles/bus_1.png" id="3_uuxwl"]
-[ext_resource type="PackedScene" uid="uid://d3td61dkqiijk" path="res://Scenes/Effects/smoke_1.tscn" id="4_4patu"]
-[ext_resource type="Texture2D" uid="uid://4ifi3umd3ofu" path="res://Assets/Textures/Particles/smoke_07.png" id="4_owvhm"]
 [ext_resource type="PackedScene" uid="uid://xipie4uq2ono" path="res://Scenes/shadow.tscn" id="5_e0snc"]
 [ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="6_4umc2"]
 [ext_resource type="Texture2D" uid="uid://cb20lrvd6j7b2" path="res://Assets/Textures/Particles/trace_01.png" id="6_cgwxy"]
@@ -21,18 +19,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5e3w"]
 size = Vector2(91.625, 379.375)
-
-[sub_resource type="Gradient" id="Gradient_uchkc"]
-offsets = PackedFloat32Array(0, 0.92, 1)
-colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="Curve" id="Curve_clbhh"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181564, 0.487544), 1.4269, 1.4269, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_ke3t6"]
-offsets = PackedFloat32Array(0.089172, 0.140127, 1)
-colors = PackedColorArray(100, 0.35, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jj2l5"]
 radius = 196.499
@@ -50,7 +36,7 @@ contact_monitor = true
 linear_damp = 1.0
 angular_damp = 5.0
 script = ExtResource("1_mim82")
-vehicle_speed = 7e+07
+vehicle_speed = 1e+08
 steer_strength = 1e+10
 metadata/_edit_lock_ = true
 
@@ -68,15 +54,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeFL" parent="Wheels/WheelFL" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkFL" parent="Wheels/WheelFL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
-trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
+trail_length = 25
+trail_width = 13.0
 use_delay_timer_instead = true
 
 [node name="WheelFR" type="Sprite2D" parent="Wheels"]
@@ -85,15 +66,9 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeFR" parent="Wheels/WheelFR" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkFR" parent="Wheels/WheelFR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
 
 [node name="WheelBL" type="Sprite2D" parent="Wheels"]
@@ -102,15 +77,9 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeBL" parent="Wheels/WheelBL" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkBL" parent="Wheels/WheelBL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
 
 [node name="WheelBR" type="Sprite2D" parent="Wheels"]
@@ -119,37 +88,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeBR" parent="Wheels/WheelBR" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkBR" parent="Wheels/WheelBR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
-
-[node name="Exhaust" type="CPUParticles2D" parent="."]
-position = Vector2(23, 175)
-amount = 100
-lifetime = 0.2
-lifetime_randomness = 0.48
-texture = ExtResource("4_owvhm")
-direction = Vector2(0, 1)
-spread = 9.37
-gravity = Vector2(0, 0)
-initial_velocity_min = 718.75
-initial_velocity_max = 833.33
-angular_velocity_min = -50.0
-angular_velocity_max = 50.0
-angle_min = -720.0
-angle_max = 720.0
-scale_amount_min = 0.05
-scale_amount_max = 0.1
-scale_amount_curve = SubResource("Curve_clbhh")
-color = Color(0.203922, 0.203922, 0.203922, 1)
-color_ramp = SubResource("Gradient_ke3t6")
 
 [node name="Vehicle" type="Sprite2D" parent="."]
 z_index = 1
@@ -185,7 +127,6 @@ energy = 3.0
 shadow_enabled = true
 texture = ExtResource("6_cgwxy")
 texture_scale = 3.0
-metadata/_edit_lock_ = true
 
 [node name="RightHeadlight" type="PointLight2D" parent="Lights"]
 position = Vector2(28, -193)
@@ -194,7 +135,6 @@ energy = 3.0
 shadow_enabled = true
 texture = ExtResource("6_cgwxy")
 texture_scale = 3.0
-metadata/_edit_lock_ = true
 
 [node name="FrontHaze" type="PointLight2D" parent="Lights"]
 position = Vector2(0, -188)
@@ -216,11 +156,9 @@ texture_scale = 0.1
 [node name="Engine" parent="." instance=ExtResource("9_q3733")]
 
 [node name="SoundManager" parent="." instance=ExtResource("10_2qmgo")]
-metadata/_edit_lock_ = true
 
 [node name="HitSounds" parent="SoundManager" instance=ExtResource("11_5bskc")]
 group_name = "HitSounds"
-metadata/_edit_lock_ = true
 
 [node name="HitSound1" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
 stream = ExtResource("12_tjbjf")

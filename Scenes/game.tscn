@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://c73ixjoguai4x"]
+[gd_scene load_steps=24 format=3 uid="uid://c73ixjoguai4x"]
 
 [ext_resource type="PackedScene" uid="uid://2w56g51n76mq" path="res://Scenes/sky_effect.tscn" id="1_2qr14"]
-[ext_resource type="Texture2D" uid="uid://cqsbra2yo8wjv" path="res://Assets/Textures/huge_grass3.png" id="1_ugfin"]
+[ext_resource type="Texture2D" uid="uid://b1d8dstjygs6w" path="res://Assets/Textures/Tiles/Asphalt/asphalt_lb.png" id="2_fam5m"]
 [ext_resource type="PackedScene" uid="uid://n7uju4c8xmpb" path="res://Scenes/bus.tscn" id="2_gnykf"]
 [ext_resource type="PackedScene" uid="uid://cmrhtgypdx0m0" path="res://Scenes/camera.tscn" id="3_uw5jw"]
-[ext_resource type="PackedScene" uid="uid://bnev6mp42wqde" path="res://Scenes/civilian.tscn" id="4_bouqf"]
+[ext_resource type="Texture2D" uid="uid://qmc0t88ytdrm" path="res://Assets/Textures/Tiles/Asphalt/asphalt_lr.png" id="3_x7181"]
+[ext_resource type="Texture2D" uid="uid://7g3f3vsu302p" path="res://Assets/Textures/Tiles/Asphalt/asphalt_rb.png" id="4_26gbf"]
 [ext_resource type="PackedScene" uid="uid://c1wb3h0lybq8n" path="res://Scenes/civilian_spawner.tscn" id="4_hf7ru"]
+[ext_resource type="Texture2D" uid="uid://bu1y3tvjcnwvb" path="res://Assets/Textures/Tiles/Asphalt/asphalt_tb.png" id="5_i8oe2"]
+[ext_resource type="Texture2D" uid="uid://xgg422ko7ipf" path="res://Assets/Textures/Tiles/Asphalt/asphalt_tl.png" id="6_2uc0e"]
+[ext_resource type="Texture2D" uid="uid://bbdn2tv5rtny2" path="res://Assets/Textures/Tiles/Asphalt/asphalt_tlrb.png" id="7_7ptvm"]
 [ext_resource type="Texture2D" uid="uid://bsyp0klj8owk7" path="res://Assets/Textures/vignette_3.png" id="7_mane6"]
+[ext_resource type="Texture2D" uid="uid://pvnqjeacwamj" path="res://Assets/Textures/Tiles/Asphalt/asphalt_tr.png" id="8_37up0"]
+[ext_resource type="PackedScene" uid="uid://cfdu8mf3gspsd" path="res://Scenes/hud.tscn" id="8_uffiu"]
 
 [sub_resource type="Environment" id="Environment_ber3h"]
 background_mode = 3
@@ -14,19 +20,92 @@ glow_enabled = true
 glow_blend_mode = 1
 glow_hdr_threshold = 0.66
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5nvdl"]
+texture = ExtResource("2_fam5m")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lu23b"]
+texture = ExtResource("3_x7181")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjru2"]
+texture = ExtResource("4_26gbf")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mhmkd"]
+texture = ExtResource("5_i8oe2")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lgwt"]
+texture = ExtResource("6_2uc0e")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjd6a"]
+texture = ExtResource("7_7ptvm")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lftt2"]
+texture = ExtResource("8_37up0")
+texture_region_size = Vector2i(500, 500)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_ywfy1"]
+tile_size = Vector2i(500, 500)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "asphalt_road"
+terrain_set_0/terrain_0/color = Color(0.596078, 0.564706, 0.819608, 1)
+sources/0 = SubResource("TileSetAtlasSource_5nvdl")
+sources/1 = SubResource("TileSetAtlasSource_lu23b")
+sources/2 = SubResource("TileSetAtlasSource_fjru2")
+sources/3 = SubResource("TileSetAtlasSource_mhmkd")
+sources/4 = SubResource("TileSetAtlasSource_7lgwt")
+sources/5 = SubResource("TileSetAtlasSource_kjd6a")
+sources/6 = SubResource("TileSetAtlasSource_lftt2")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dpy"]
-radius = 2690.21
+radius = 6725.37
 
 [node name="Game" type="Node2D"]
 
 [node name="SkyEffect" parent="." instance=ExtResource("1_2qr14")]
+metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ber3h")
 
-[node name="BackgroundTemp" type="Sprite2D" parent="."]
-scale = Vector2(10, 10)
-texture = ExtResource("1_ugfin")
+[node name="Map1" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ywfy1")
+format = 2
+layer_0/tile_data = PackedInt32Array(65532, 4, 0, -4, 3, 0, -65540, 3, 0, -131076, 3, 0, -196612, 2, 0, -196609, 0, 0, -196610, 1, 0, -196611, 1, 0, -131073, 4, 0, -131074, 1, 0, -131075, 2, 0, -65539, 6, 0, -65538, 1, 0, -65537, 0, 0, -1, 4, 0, -2, 1, 0, -3, 2, 0, 65533, 6, 0, 65534, 1, 0, 65535, 1, 0, 0, 4, 0, -65536, 3, 0, -131072, 3, 0, -196608, 3, 0, -262144, 2, 0, -262143, 0, 0, -196607, 6, 0, -196604, 4, 0, -196605, 1, 0, -196606, 1, 0, -262140, 0, 0, -262141, 1, 0, -262142, 6, 0, -327678, 2, 0, -327675, 0, 0, -327676, 1, 0, -327677, 1, 0, -131067, 4, 0, -196603, 3, 0, -262139, 3, 0, -131068, 1, 0, -131069, 1, 0, -131070, 1, 0, -131071, 2, 0, -65535, 6, 0, -65531, 0, 0, -65532, 1, 0, -65533, 1, 0, -65534, 1, 0, 5, 4, 0, 4, 2, 0, 65540, 4, 0, 65539, 6, 0, 3, 0, 0, 2, 1, 0, 1, 2, 0, 65537, 6, 0, 65538, 0, 0, 131074, 4, 0, 131073, 1, 0, 131072, 6, 0, 65536, 0, 0, 131071, 1, 0, 131070, 1, 0, 131069, 1, 0, 131068, 1, 0, 131067, 6, 0, 65531, 3, 0, -5, 3, 0, -65541, 3, 0, -131077, 3, 0, -196613, 0, 0, -196614, 2, 0, 196602, 6, 0, 131066, 3, 0, 65530, 3, 0, -6, 3, 0, -65542, 3, 0, -131078, 3, 0, 196604, 0, 0, 196603, 1, 0, 262140, 6, 0, 262141, 4, 0, 196605, 2, 0, 196606, 4, 0)
 
 [node name="Camera" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("3_uw5jw")]
 follow_node = NodePath("../Bus")
@@ -35,20 +114,21 @@ metadata/_edit_lock_ = true
 [node name="CivilianSpawner" parent="." instance=ExtResource("4_hf7ru")]
 position = Vector2(385, -261)
 spawn_amount = 1000
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CivilianSpawner"]
+visible = false
 shape = SubResource("CircleShape2D_v7dpy")
+debug_color = Color(0.694118, 0.286275, 1, 0.419608)
+metadata/_edit_lock_ = true
 
 [node name="Bus" parent="." instance=ExtResource("2_gnykf")]
 
-[node name="Civilian" parent="." instance=ExtResource("4_bouqf")]
-position = Vector2(359, 175)
-
 [node name="ActiveEffects" type="Node" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PostEffects" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="Vignette" type="TextureRect" parent="PostEffects"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,3 +136,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_mane6")
 expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="HUD" parent="." instance=ExtResource("8_uffiu")]

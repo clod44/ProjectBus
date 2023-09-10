@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://n7uju4c8xmpb"]
+[gd_scene load_steps=24 format=3 uid="uid://n7uju4c8xmpb"]
 
 [ext_resource type="Script" path="res://Scripts/vehicle.gd" id="1_mim82"]
 [ext_resource type="PackedScene" uid="uid://bi2msp4erewla" path="res://Scenes/Effects/trail.tscn" id="2_qeaf7"]
@@ -21,10 +21,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5e3w"]
 size = Vector2(91.625, 379.375)
-
-[sub_resource type="Gradient" id="Gradient_uchkc"]
-offsets = PackedFloat32Array(0, 0.92, 1)
-colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="Curve" id="Curve_clbhh"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181564, 0.487544), 1.4269, 1.4269, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -50,7 +46,7 @@ contact_monitor = true
 linear_damp = 1.0
 angular_damp = 5.0
 script = ExtResource("1_mim82")
-vehicle_speed = 7e+07
+vehicle_speed = 1e+08
 steer_strength = 1e+10
 metadata/_edit_lock_ = true
 
@@ -68,16 +64,14 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeFL" parent="Wheels/WheelFL" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkFL" parent="Wheels/WheelFL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
-trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
+trail_length = 25
+trail_width = 13.0
 use_delay_timer_instead = true
+
+[node name="SmokeFL" parent="Wheels/WheelFL" instance=ExtResource("4_4patu")]
+metadata/_edit_lock_ = true
 
 [node name="WheelFR" type="Sprite2D" parent="Wheels"]
 position = Vector2(41, -118)
@@ -85,16 +79,13 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeFR" parent="Wheels/WheelFR" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkFR" parent="Wheels/WheelFR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
+
+[node name="SmokeFR" parent="Wheels/WheelFR" instance=ExtResource("4_4patu")]
+metadata/_edit_lock_ = true
 
 [node name="WheelBL" type="Sprite2D" parent="Wheels"]
 position = Vector2(-42, 108)
@@ -102,16 +93,13 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeBL" parent="Wheels/WheelBL" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkBL" parent="Wheels/WheelBL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
+
+[node name="SmokeBL" parent="Wheels/WheelBL" instance=ExtResource("4_4patu")]
+metadata/_edit_lock_ = true
 
 [node name="WheelBR" type="Sprite2D" parent="Wheels"]
 position = Vector2(42, 108)
@@ -119,16 +107,13 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
-[node name="SmokeBR" parent="Wheels/WheelBR" instance=ExtResource("4_4patu")]
-emitting = false
-metadata/_edit_lock_ = true
-
 [node name="TireMarkBR" parent="Wheels/WheelBR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-emitting = true
 trail_length = 50
-trail_color = SubResource("Gradient_uchkc")
 use_delay_timer_instead = true
+
+[node name="SmokeBR" parent="Wheels/WheelBR" instance=ExtResource("4_4patu")]
+metadata/_edit_lock_ = true
 
 [node name="Exhaust" type="CPUParticles2D" parent="."]
 position = Vector2(23, 175)

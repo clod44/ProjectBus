@@ -50,7 +50,7 @@ contact_monitor = true
 linear_damp = 1.0
 angular_damp = 5.0
 script = ExtResource("1_mim82")
-vehicle_speed = 7e+07
+vehicle_speed = 1e+08
 steer_strength = 1e+10
 metadata/_edit_lock_ = true
 
@@ -69,10 +69,9 @@ texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
 [node name="SmokeFL" parent="Wheels/WheelFL" instance=ExtResource("4_4patu")]
-emitting = false
 metadata/_edit_lock_ = true
 
-[node name="TireMarkFL" parent="Wheels/WheelFL" instance=ExtResource("2_qeaf7")]
+[node name="TrailMarkFL" parent="Wheels/WheelFL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
 emitting = true
 trail_length = 50
@@ -86,10 +85,9 @@ texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
 [node name="SmokeFR" parent="Wheels/WheelFR" instance=ExtResource("4_4patu")]
-emitting = false
 metadata/_edit_lock_ = true
 
-[node name="TireMarkFR" parent="Wheels/WheelFR" instance=ExtResource("2_qeaf7")]
+[node name="TrailMarkFR" parent="Wheels/WheelFR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
 emitting = true
 trail_length = 50
@@ -103,10 +101,9 @@ texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
 [node name="SmokeBL" parent="Wheels/WheelBL" instance=ExtResource("4_4patu")]
-emitting = false
 metadata/_edit_lock_ = true
 
-[node name="TireMarkBL" parent="Wheels/WheelBL" instance=ExtResource("2_qeaf7")]
+[node name="TrailMarkBL" parent="Wheels/WheelBL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
 emitting = true
 trail_length = 50
@@ -120,10 +117,9 @@ texture = ExtResource("2_vk1gw")
 metadata/_edit_lock_ = true
 
 [node name="SmokeBR" parent="Wheels/WheelBR" instance=ExtResource("4_4patu")]
-emitting = false
 metadata/_edit_lock_ = true
 
-[node name="TireMarkBR" parent="Wheels/WheelBR" instance=ExtResource("2_qeaf7")]
+[node name="TrailMarkBR" parent="Wheels/WheelBR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
 emitting = true
 trail_length = 50

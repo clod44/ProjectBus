@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://0b2swoadgi4b"]
+
+[ext_resource type="Script" path="res://Scripts/gauge.gd" id="1_icdwg"]
+[ext_resource type="Texture2D" uid="uid://ddo786s2tbu3e" path="res://Assets/Textures/UI/Gauges/gauge_under_1.png" id="2_pi2yn"]
+[ext_resource type="Texture2D" uid="uid://cyovifxgccjyx" path="res://Assets/Textures/UI/Gauges/gauge_progress_1.png" id="3_5gtkh"]
+[ext_resource type="Theme" uid="uid://c3g52o15bvdv7" path="res://hud.tres" id="3_oqfah"]
+[ext_resource type="Texture2D" uid="uid://c22hwivoj8wa8" path="res://Assets/Textures/UI/Gauges/gauge_over_1.png" id="4_mcdu5"]
+
+[node name="Gauge" type="Sprite2D"]
+texture = ExtResource("2_pi2yn")
+script = ExtResource("1_icdwg")
+metadata/_edit_lock_ = true
+
+[node name="Label1" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -3.0
+offset_right = 25.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_oqfah")
+theme_override_font_sizes/font_size = 12
+text = "Text: 10"
+vertical_alignment = 1
+clip_text = true
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 5.0
+offset_top = -16.0
+offset_right = 23.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_oqfah")
+theme_override_font_sizes/font_size = 12
+text = "N"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Progress" type="Sprite2D" parent="."]
+texture = ExtResource("3_5gtkh")
+metadata/_edit_lock_ = true
+
+[node name="Over" type="Sprite2D" parent="."]
+texture = ExtResource("4_mcdu5")
+metadata/_edit_lock_ = true
