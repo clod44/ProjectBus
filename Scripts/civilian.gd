@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+@onready var popup_text_generator := $PopupTextGenerator
 @onready var collision_shape := $CollisionShape2D
 var is_dead := false :
 	set(value):
@@ -10,8 +11,9 @@ var is_dead := false :
 	set(value):
 		var old_health = health
 		health = value
-		if old_health != health:
-			take_damage()
+		var health_difference = old_health - health
+		if health_difference != 0:
+			take_damage(health_difference)
 
 enum CIVILIAN_TYPES {
 	MAN_1,
@@ -47,13 +49,18 @@ func _process(_delta):
 	pass
 
 
-func take_damage():
+func take_damage(amount):	
+	popup_text_generator.create_popup("DMG+"+str(round(amount)))
 	if health <= 0:
 		die()
 
 
 
 func die():
+	Global.camera.shake(1, 5)
 	is_dead = true
 	modulate = Color.RED
+	var death_tween = create_tween()
+	death_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0, 0.0), 10.0)
+	death_tween.tween_callback(queue_free)
 	#queue_free()

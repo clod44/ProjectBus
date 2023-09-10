@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://n7uju4c8xmpb"]
+[gd_scene load_steps=12 format=3 uid="uid://n7uju4c8xmpb"]
 
 [ext_resource type="Script" path="res://Scripts/vehicle.gd" id="1_mim82"]
 [ext_resource type="PackedScene" uid="uid://bi2msp4erewla" path="res://Scenes/Effects/trail.tscn" id="2_qeaf7"]
 [ext_resource type="Texture2D" uid="uid://c52tlngjxphnu" path="res://Assets/Textures/Wheels/wheel_1.png" id="2_vk1gw"]
 [ext_resource type="Texture2D" uid="uid://cjeaqcj5fygal" path="res://Assets/Textures/Vehicles/bus_1.png" id="3_uuxwl"]
+[ext_resource type="PackedScene" uid="uid://xipie4uq2ono" path="res://Scenes/shadow.tscn" id="5_e0snc"]
+[ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="6_4umc2"]
+[ext_resource type="Texture2D" uid="uid://cb20lrvd6j7b2" path="res://Assets/Textures/Particles/trace_01.png" id="6_cgwxy"]
+[ext_resource type="Texture2D" uid="uid://uvxp6pedvcc5" path="res://Assets/Textures/Particles/star_05.png" id="8_b4o5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5e3w"]
 size = Vector2(91.625, 379.375)
@@ -11,7 +15,11 @@ size = Vector2(91.625, 379.375)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jj2l5"]
 radius = 196.499
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2amni"]
+polygon = PackedVector2Array(-44, 188, 44, 188, 44, -182, -43, -183)
+
 [node name="Bus" type="RigidBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 13
 mass = 1000.0
@@ -25,6 +33,7 @@ steer_strength = 1e+10
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_a5e3w")
 metadata/_edit_lock_ = true
 
@@ -32,6 +41,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-41, -118)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
 [node name="Trail" parent="WheelFL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
@@ -41,6 +51,7 @@ is_visible = true
 position = Vector2(41, -118)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
 [node name="Trail" parent="WheelFR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
@@ -50,6 +61,7 @@ is_visible = true
 position = Vector2(-42, 108)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
 [node name="Trail" parent="WheelBL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
@@ -59,6 +71,7 @@ is_visible = true
 position = Vector2(42, 108)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
 [node name="Trail" parent="WheelBR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
@@ -69,10 +82,54 @@ z_index = 1
 rotation = -1.5708
 scale = Vector2(3, 3)
 texture = ExtResource("3_uuxwl")
+metadata/_edit_lock_ = true
+
+[node name="Shadow" parent="Vehicle" instance=ExtResource("5_e0snc")]
+shadow_height = 20.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 12
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_jj2l5")
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_2amni")
+metadata/_edit_lock_ = true
+
+[node name="LeftHeadlight" type="PointLight2D" parent="."]
+position = Vector2(-28, -193)
+rotation = -0.174533
+energy = 3.0
+shadow_enabled = true
+texture = ExtResource("6_cgwxy")
+texture_scale = 3.0
+
+[node name="RightHeadlight" type="PointLight2D" parent="."]
+position = Vector2(28, -193)
+rotation = 0.174533
+energy = 3.0
+shadow_enabled = true
+texture = ExtResource("6_cgwxy")
+texture_scale = 3.0
+
+[node name="FrontHaze" type="PointLight2D" parent="."]
+position = Vector2(0, -188)
+texture = ExtResource("6_4umc2")
+texture_scale = 3.0
+
+[node name="RearLeftLight" type="PointLight2D" parent="."]
+position = Vector2(-30, 193)
+color = Color(16.41, 1.56, 1.56, 1)
+texture = ExtResource("8_b4o5d")
+texture_scale = 0.1
+
+[node name="RearRightLight" type="PointLight2D" parent="."]
+position = Vector2(29, 192)
+color = Color(16.41, 1.56, 1.56, 1)
+texture = ExtResource("8_b4o5d")
+texture_scale = 0.1

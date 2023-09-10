@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xipie4uq2ono"]
+
+[ext_resource type="Script" path="res://Scripts/shadow.gd" id="2_nmvea"]
+
+[node name="Shadow" type="Node"]
+script = ExtResource("2_nmvea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -16,15 +16,18 @@ func _ready():
 
 
 func on_body_enter(body):
+	var linear_vel_len = linear_velocity.length()
 	if body is RigidBody2D:
+		Global.camera.shake(1, 1)
 		if "is_dead" in body:
 			if !body.is_dead:
 				body.apply_impulse(linear_velocity * 0.1)
+				body.apply_torque_impulse(randf_range(-1, 1) * linear_vel_len * 10)
 		else:
 			body.apply_impulse(linear_velocity * 0.1)
-			
+			body.apply_torque_impulse(randf_range(-1, 1) * linear_vel_len)
 	if "health" in body:
-		body.health -= linear_velocity.length() * 0.5
+		body.health -= linear_vel_len * 0.5
 var move_force := 0.0
 
 func _process(_delta):

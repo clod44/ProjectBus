@@ -6,7 +6,8 @@ signal player_updated
 var camera = null
 
 var game_time_minutes :float = 720.0
-var game_time_minutes_speed := 1.0
+var game_time_minutes_speed := 100.0
+var sun_direction := Vector2.ZERO 
 
 var player = null :
 	set(value):
@@ -16,6 +17,7 @@ var player = null :
 
 func _process(delta):
 	game_time_minutes += delta * game_time_minutes_speed
+	sun_direction = Vector2.from_angle(remap(fmod(game_time_minutes, 1440.0), 0, 1440, 0, PI * 2))
 
 
 #formatting time
