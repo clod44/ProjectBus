@@ -1,12 +1,25 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnev6mp42wqde"]
+[gd_scene load_steps=30 format=3 uid="uid://bnev6mp42wqde"]
 
 [ext_resource type="Script" path="res://Scripts/civilian.gd" id="1_3egev"]
 [ext_resource type="Texture2D" uid="uid://clvwgpxlpdr7e" path="res://Assets/Textures/Civilians/woman_1.png" id="1_musfl"]
-[ext_resource type="PackedScene" uid="uid://xipie4uq2ono" path="res://Scenes/shadow.tscn" id="3_butvu"]
+[ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="3_dpc4e"]
 [ext_resource type="PackedScene" uid="uid://xwsdwlyk6uua" path="res://Scenes/popup_text_generator.tscn" id="3_kfb8i"]
 [ext_resource type="Texture2D" uid="uid://ba6wticnnfouw" path="res://Assets/Textures/Particles/dirt_03.png" id="5_yj7i4"]
 [ext_resource type="Texture2D" uid="uid://uupsx03h24pb" path="res://Assets/Textures/Particles/fire_01.png" id="6_5xqca"]
 [ext_resource type="Texture2D" uid="uid://c7cc4c0gyfsbm" path="res://Assets/Textures/Particles/dirt_01.png" id="7_tnhcy"]
+[ext_resource type="PackedScene" uid="uid://bng6qsiwltdqg" path="res://Scenes/sound_manager.tscn" id="8_6d54m"]
+[ext_resource type="PackedScene" uid="uid://b3gaqk8o5pybm" path="res://Scenes/sound_group.tscn" id="9_fvrxv"]
+[ext_resource type="AudioStream" uid="uid://y1isv3gudpg3" path="res://Assets/Sounds/Civilians/man_hurt_1.mp3" id="10_v86uk"]
+[ext_resource type="AudioStream" uid="uid://dd0f3sn60mlh8" path="res://Assets/Sounds/Civilians/man_hurt_2.mp3" id="11_h0l6i"]
+[ext_resource type="AudioStream" uid="uid://bxv1fqpes621r" path="res://Assets/Sounds/Civilians/man_hurt_3.mp3" id="12_ph1mf"]
+[ext_resource type="AudioStream" uid="uid://deapfl0kasmx7" path="res://Assets/Sounds/Civilians/man_hurt_4.mp3" id="13_2g2il"]
+[ext_resource type="AudioStream" uid="uid://cqu7vyi2t1en5" path="res://Assets/Sounds/Civilians/man_scream_1.mp3" id="14_g0t6q"]
+[ext_resource type="AudioStream" uid="uid://c1hl7826g5c75" path="res://Assets/Sounds/Civilians/man_scream_2.mp3" id="15_j7ai2"]
+[ext_resource type="AudioStream" uid="uid://kvty6ahw8c2a" path="res://Assets/Sounds/Civilians/man_scream_3.mp3" id="16_k0o1x"]
+[ext_resource type="AudioStream" uid="uid://24pkkmlintvt" path="res://Assets/Sounds/Civilians/woman_hurt_1.mp3" id="17_3kyk7"]
+[ext_resource type="AudioStream" uid="uid://pkk2cpitmstd" path="res://Assets/Sounds/Civilians/woman_hurt_2.mp3" id="18_jdlep"]
+[ext_resource type="AudioStream" uid="uid://juxmwwvkl6q1" path="res://Assets/Sounds/Civilians/woman_scream_1.mp3" id="19_p6k27"]
+[ext_resource type="AudioStream" uid="uid://dblacvlb5xfb1" path="res://Assets/Sounds/Civilians/woman_scream_2.mp3" id="20_kvd46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qfefj"]
 radius = 19.105
@@ -15,11 +28,11 @@ radius = 19.105
 polygon = PackedVector2Array(0, -17, 17, 0, 0, 17, -16, 0)
 
 [sub_resource type="Curve" id="Curve_i2ats"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.388268, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.120112, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_vpoab"]
-offsets = PackedFloat32Array(0, 0.178344, 0.936306, 1)
+offsets = PackedFloat32Array(0, 0.0828025, 0.936306, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.502719, 0.502719, 0.502719, 0.95, 1, 1, 1, 0)
 
 [sub_resource type="Curve" id="Curve_hybiw"]
@@ -56,7 +69,11 @@ z_index = 1
 scale = Vector2(2, 2)
 texture = ExtResource("1_musfl")
 
-[node name="Shadow" parent="Sprite2D" instance=ExtResource("3_butvu")]
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_dpc4e")
 
 [node name="PopupTextGenerator" parent="." instance=ExtResource("3_kfb8i")]
 visible = false
@@ -119,3 +136,66 @@ color = Color(0.6, 0, 0.0235294, 1)
 color_ramp = SubResource("Gradient_1hlrm")
 hue_variation_max = 0.02
 hue_variation_curve = SubResource("Curve_wfmvx")
+
+[node name="SoundManager" parent="." instance=ExtResource("8_6d54m")]
+
+[node name="ManHitSounds" parent="SoundManager" instance=ExtResource("9_fvrxv")]
+group_name = "ManHitSounds"
+
+[node name="man_hurt_1" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("10_v86uk")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_hurt_2" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("11_h0l6i")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_hurt_3" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("12_ph1mf")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_hurt_4" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("13_2g2il")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_scream_1" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("14_g0t6q")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_scream_2" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("15_j7ai2")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="man_scream_3" type="AudioStreamPlayer2D" parent="SoundManager/ManHitSounds"]
+stream = ExtResource("16_k0o1x")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="WomanHitSounds" parent="SoundManager" instance=ExtResource("9_fvrxv")]
+group_name = "WomanHitSounds"
+
+[node name="woman_hurt_1" type="AudioStreamPlayer2D" parent="SoundManager/WomanHitSounds"]
+stream = ExtResource("17_3kyk7")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="woman_hurt_2" type="AudioStreamPlayer2D" parent="SoundManager/WomanHitSounds"]
+stream = ExtResource("18_jdlep")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="woman_scream_1" type="AudioStreamPlayer2D" parent="SoundManager/WomanHitSounds"]
+stream = ExtResource("19_p6k27")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="woman_scream_2" type="AudioStreamPlayer2D" parent="SoundManager/WomanHitSounds"]
+stream = ExtResource("20_kvd46")
+volume_db = -15.0
+max_polyphony = 5

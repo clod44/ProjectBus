@@ -19,6 +19,6 @@ func on_parent_ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	sprite.global_position = my_parent.global_position + Global.sun_direction * shadow_height
+	sprite.global_position = my_parent.global_position + Global.shadow_direction * shadow_height
 	sprite.global_rotation = my_parent.global_rotation
 	sprite.scale = my_parent.scale

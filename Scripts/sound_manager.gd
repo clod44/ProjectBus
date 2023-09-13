@@ -14,3 +14,9 @@ func _process(_delta):
 
 func play_random_from_group(group_name = null):
 	sound_groups[group_name].play_random()
+
+func play_from_group(group_name = null, sound_name = null):
+	sound_groups[group_name].play(sound_name)
+
+func stop_from_group(group_name = null, sound_name = null):
+	sound_groups[group_name].stop(sound_name)

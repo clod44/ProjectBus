@@ -25,8 +25,12 @@ var is_drifting = true :
 				tiremark.emitting = is_drifting
 			for tire_smoke in tire_smokes:
 				tire_smoke.emitting = is_drifting
+			if is_drifting:
+				sound_manager.play_from_group("UtilSounds", "WheelScreaming")
+			else:
+				sound_manager.stop_from_group("UtilSounds", "WheelScreaming")
 @export var drift_angle_threshold = 25.0
-@export var drift_speed_threshold = 1000.0
+@export var drift_speed_threshold = 500.0
 @onready var tiremarks := [
 	$Wheels/WheelFL/TireMarkFL,
 	$Wheels/WheelFR/TireMarkFR,

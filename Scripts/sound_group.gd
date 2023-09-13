@@ -4,14 +4,16 @@ extends Node2D
 @export var group_name = "Default Sound Group"
 
 	
-
+var sounds = {}
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+	for sound in get_children():
+		sounds[sound.name] = sound	
 
 func play_random():
-	get_children().pick_random().play()
+	sounds.values().pick_random().play()
+	
+func play(sound_name = null):
+	sounds[sound_name].play()
+	
+func stop(sound_name = null):
+	sounds[sound_name].stop()
