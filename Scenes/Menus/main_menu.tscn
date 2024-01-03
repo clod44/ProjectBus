@@ -184,10 +184,10 @@ theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuBar"]
-autoplay = "menu_in"
 libraries = {
 "": SubResource("AnimationLibrary_gmrk7")
 }
+autoplay = "menu_in"
 
 [node name="FadeInOut" type="ColorRect" parent="."]
 visible = false
@@ -201,7 +201,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeInOut"]
-autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_726vt")
 }
+autoplay = "fade_in"

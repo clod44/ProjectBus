@@ -38,6 +38,12 @@ spawn_amount = 100
 
 [node name="Props" type="Node" parent="CityCenter/PropSpawner"]
 
+[node name="Bank2" parent="CityCenter/PropSpawner/Props" instance=ExtResource("6_y03tr")]
+position = Vector2(-551, -420)
+
+[node name="TrashBin2" parent="CityCenter/PropSpawner/Props" instance=ExtResource("7_4cwl8")]
+position = Vector2(-555, -500)
+
 [node name="Bank" parent="CityCenter/PropSpawner/Props" instance=ExtResource("6_y03tr")]
 position = Vector2(-557, -127)
 
