@@ -36,7 +36,7 @@ point_count = 3
 offsets = PackedFloat32Array(0.089172, 0.140127, 1)
 colors = PackedColorArray(100, 0.35, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefuu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61jsn"]
 resource_local_to_scene = true
 shader = ExtResource("8_oe86f")
 shader_parameter/shadow_dir = Vector2(1, 0)
@@ -169,7 +169,7 @@ texture = ExtResource("3_uuxwl")
 metadata/_edit_lock_ = true
 
 [node name="ShadowShader" parent="Vehicle" instance=ExtResource("7_gxf0d")]
-material = SubResource("ShaderMaterial_tefuu")
+material = SubResource("ShaderMaterial_61jsn")
 shadow_length = 10.0
 update_shadows_from_this = true
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx3dawk7vb5yt"
-path="res://.godot/imported/streetlamp_1.png-eb8ea419d99c686854b3f5b1c9235f25.ctex"
+uid="uid://dmhisk6wcvo8p"
+path="res://.godot/imported/trashbin.png-55ee61657bbeab82d48c49ca4d0c9991.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Props/streetlamp_1.png"
-dest_files=["res://.godot/imported/streetlamp_1.png-eb8ea419d99c686854b3f5b1c9235f25.ctex"]
+source_file="res://Assets/Textures/Props/trashbin.png"
+dest_files=["res://.godot/imported/trashbin.png-55ee61657bbeab82d48c49ca4d0c9991.ctex"]
 
 [params]
 

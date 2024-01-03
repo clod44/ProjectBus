@@ -8,6 +8,7 @@ var props := []
 
 var spawn_despawn_effect_tween
 func _ready():
+	visible = true
 	connect("area_entered", spawn_all)
 	$DespawnArea.connect("area_exited", despawn_all)
 	if get_node_or_null("CollisionShape2D") != null:
