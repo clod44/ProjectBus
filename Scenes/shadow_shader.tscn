@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://v22rd6yqh1k"]
+
+[ext_resource type="Shader" path="res://Scenes/shadow.gdshader" id="1_eu7h3"]
+[ext_resource type="Texture2D" uid="uid://cjeaqcj5fygal" path="res://Assets/Textures/Vehicles/bus_1.png" id="2_2d0ro"]
+[ext_resource type="Script" path="res://Scripts/shadow_shader.gd" id="3_x0hqm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igh01"]
+resource_local_to_scene = true
+shader = ExtResource("1_eu7h3")
+shader_parameter/shadow_dir = Vector2(1, 0)
+shader_parameter/shadow_length = 5.0
+shader_parameter/shadow_color = Vector4(0, 0, 0, 0.5)
+shader_parameter/my_rotation = 0.0
+shader_parameter/sprite_texture = ExtResource("2_2d0ro")
+
+[node name="ShadowShader" type="ColorRect"]
+z_index = -1
+material = SubResource("ShaderMaterial_igh01")
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_x0hqm")

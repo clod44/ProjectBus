@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://b827npiyyda0y"]
+
+[ext_resource type="PackedScene" uid="uid://cxai7vo4d3kvt" path="res://Scenes/prop.tscn" id="1_jkw2m"]
+[ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="2_gduo2"]
+[ext_resource type="Texture2D" uid="uid://dboy8bgne1lav" path="res://Assets/Textures/Props/bank.png" id="3_rwi4t"]
+[ext_resource type="Texture2D" uid="uid://bs6xcxsumx68x" path="res://Assets/Textures/Props/bank_broken.png" id="4_o4gvi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vr65i"]
+size = Vector2(14.6667, 14.375)
+
+[node name="Bank" type="Marker2D"]
+
+[node name="Prop" parent="." instance=ExtResource("1_jkw2m")]
+position = Vector2(11, 4)
+rotation = 1.5708
+mass = 50.0
+linear_damp = 5.0
+angular_damp = 12.0
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="Prop"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 0.148926)
+scale = Vector2(0.397504, 0.150702)
+texture = ExtResource("2_gduo2")
+metadata/_edit_lock_ = true
+
+[node name="SpriteNormal" type="Sprite2D" parent="Prop"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_rwi4t")
+metadata/_edit_lock_ = true
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="Prop"]
+visible = false
+scale = Vector2(3, 3)
+texture = ExtResource("4_o4gvi")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Prop"]
+position = Vector2(0, 2.9375)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_vr65i")
+metadata/_edit_lock_ = true

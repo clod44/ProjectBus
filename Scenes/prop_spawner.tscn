@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm7khbl4rq2cn"]
+
+[ext_resource type="Script" path="res://Scripts/prop_spawner.gd" id="1_hie1i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ioe5"]
+radius = 308.016
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2ywc"]
+radius = 5000.0
+
+[node name="PropSpawner" type="Area2D"]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_hie1i")
+
+[node name="DefaultCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6ioe5")
+debug_color = Color(0.65098, 0.329412, 1, 0.419608)
+
+[node name="DespawnArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnArea"]
+shape = SubResource("CircleShape2D_q2ywc")
+debug_color = Color(0.701961, 0.27451, 1, 0.419608)
+
+[node name="SpawnedProps" type="Node2D" parent="."]
+
+[node name="ActionDelay" type="Timer" parent="."]
+one_shot = true
+autostart = true

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxai7vo4d3kvt"]
+
+[ext_resource type="Script" path="res://Scripts/prop.gd" id="1_lini4"]
+
+[node name="Prop" type="RigidBody2D"]
+collision_mask = 3
+linear_damp = 10.0
+angular_damp = 5.0
+script = ExtResource("1_lini4")

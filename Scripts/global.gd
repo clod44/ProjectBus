@@ -1,22 +1,25 @@
 extends Node
 
-signal player_updated
+signal vehicle_updated
 
 #world
 var camera = null
 
 var game_time_minutes :float = 720.0
 var game_time_minutes_speed := 1.0
+var shadow_direction := Vector2.ZERO 
 
-var player = null :
+var vehicle = null :
 	set(value):
-		player = value
-		emit_signal("player_updated")
+		vehicle = value
+		emit_signal("vehicle_updated")
 
 
 func _process(delta):
 	game_time_minutes += delta * game_time_minutes_speed
-
+	shadow_direction = Vector2.from_angle(remap(fmod(game_time_minutes, 1440.0), 0, 1440, 0, PI * 2))
+	if is_instance_valid(vehicle) and is_instance_valid(camera):
+		camera.desired_zoom = remap(vehicle.linear_velocity.length(), 0, 1000, camera.max_zoom_in, camera.max_zoom_out)
 
 #formatting time
 func format_time_24(minutes= null):

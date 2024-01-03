@@ -11,6 +11,9 @@ extends Camera2D
 ## [br]0.1 = smooth camera follow
 ## [br]1.0 = instant camera snap 
 @export var smoothing_speed := 0.3
+@export var follow_ahead := true
+@export var follow_ahead_factor := 0.5
+@export var follow_ahead_max_dist := 1000
 
 @export var mouse_offset_factor := 0.01
 var desired_zoom := 1.0
@@ -19,15 +22,9 @@ var current_zoom := 1.0
 @export_group("Zooming")
 ## zoom speed/smoothness
 @export var zoom_interpolation := 0.1
-@export_subgroup("Day Zooming")
-@export var day_zoom_time := 12.0
-@export var max_day_zoom := 1.0
-@export var min_day_zoom := 2.0
-
-@export_subgroup("Night Zooming")
-@export var night_zoom_time := 3.0
-@export var max_night_zoom := 1.0
-@export var min_night_zoom := 2.0
+@export_subgroup("Zooming")
+@export var max_zoom_out := 0.4
+@export var max_zoom_in := 1.0
 
 @export_subgroup("Camera Shake")
 var shake_amount := 1.0 #this represent the t of shaking 1 to 0 expoential decay. dont touch this
@@ -57,6 +54,9 @@ func _ready():
 func _physics_process(delta):
 	if is_instance_valid(follow_node):
 		target_pos = follow_node.global_position
+		if follow_ahead:
+			var follow_ahead_offset = follow_node.linear_velocity * follow_ahead_factor
+			target_pos += follow_ahead_offset.limit_length(follow_ahead_max_dist)
 	var smoothed_pos = global_position.lerp(target_pos, smoothing_speed * delta * 60)
 	global_position = smoothed_pos + get_local_mouse_position() * mouse_offset_factor 
 	
@@ -65,13 +65,7 @@ func _physics_process(delta):
 	elif(Input.is_action_just_released("zoom_out")):
 		desired_zoom += 1
 	
-	var hours = fmod(Global.game_time_minutes / 60.0, 24)
-	var night_zoom_factor = abs(remap(hours, day_zoom_time, night_zoom_time, 0, 1))
-	desired_zoom = clamp(
-		desired_zoom, 
-		lerp(max_day_zoom, max_night_zoom, night_zoom_factor),
-		lerp(min_day_zoom, min_night_zoom, night_zoom_factor)
-		)
+	desired_zoom = clamp(desired_zoom, max_zoom_out, max_zoom_in)
 	current_zoom = lerp(current_zoom, desired_zoom, zoom_interpolation * delta * 60)
 	zoom = Vector2(current_zoom, current_zoom)
 	

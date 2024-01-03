@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c73ixjoguai4x"]
+[gd_scene load_steps=12 format=3 uid="uid://c73ixjoguai4x"]
 
-[ext_resource type="Texture2D" uid="uid://cqsbra2yo8wjv" path="res://Assets/Textures/huge_grass3.png" id="1_ugfin"]
+[ext_resource type="PackedScene" uid="uid://2w56g51n76mq" path="res://Scenes/sky_effect.tscn" id="1_2qr14"]
+[ext_resource type="PackedScene" uid="uid://bpxbgs62ubq7c" path="res://Scenes/Maps/city_center.tscn" id="2_d8jd2"]
 [ext_resource type="PackedScene" uid="uid://n7uju4c8xmpb" path="res://Scenes/bus.tscn" id="2_gnykf"]
 [ext_resource type="PackedScene" uid="uid://cmrhtgypdx0m0" path="res://Scenes/camera.tscn" id="3_uw5jw"]
-[ext_resource type="PackedScene" uid="uid://bnev6mp42wqde" path="res://Scenes/civilian.tscn" id="4_bouqf"]
-[ext_resource type="PackedScene" uid="uid://c1wb3h0lybq8n" path="res://Scenes/civilian_spawner.tscn" id="4_hf7ru"]
+[ext_resource type="PackedScene" uid="uid://c1wb3h0lybq8n" path="res://Scenes/civilian_spawner.tscn" id="4_h5gs8"]
+[ext_resource type="PackedScene" uid="uid://bm7khbl4rq2cn" path="res://Scenes/prop_spawner.tscn" id="5_4idlb"]
+[ext_resource type="PackedScene" uid="uid://b827npiyyda0y" path="res://Scenes/Props/bank.tscn" id="6_y03tr"]
+[ext_resource type="PackedScene" uid="uid://c7qo3qm5af0m" path="res://Scenes/Props/trash_bin.tscn" id="7_4cwl8"]
+[ext_resource type="Texture2D" uid="uid://bsyp0klj8owk7" path="res://Assets/Textures/vignette_3.png" id="7_mane6"]
+[ext_resource type="PackedScene" uid="uid://cfdu8mf3gspsd" path="res://Scenes/hud.tscn" id="8_uffiu"]
 
 [sub_resource type="Environment" id="Environment_ber3h"]
 background_mode = 3
@@ -14,6 +19,9 @@ glow_hdr_threshold = 0.66
 
 [node name="Game" type="Node2D"]
 
+[node name="SkyEffect" parent="." instance=ExtResource("1_2qr14")]
+metadata/_edit_lock_ = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ber3h")
 
@@ -21,24 +29,41 @@ environment = SubResource("Environment_ber3h")
 follow_node = NodePath("../Bus")
 metadata/_edit_lock_ = true
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="CityCenter" parent="." instance=ExtResource("2_d8jd2")]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1290, 730)
-metadata/_edit_lock_ = true
+[node name="CivilianSpawner" parent="CityCenter" instance=ExtResource("4_h5gs8")]
+spawn_amount = 100
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource("1_ugfin")
-centered = false
-metadata/_edit_lock_ = true
+[node name="PropSpawner" parent="CityCenter" instance=ExtResource("5_4idlb")]
+
+[node name="Props" type="Node" parent="CityCenter/PropSpawner"]
+
+[node name="Bank2" parent="CityCenter/PropSpawner/Props" instance=ExtResource("6_y03tr")]
+position = Vector2(-551, -420)
+
+[node name="TrashBin2" parent="CityCenter/PropSpawner/Props" instance=ExtResource("7_4cwl8")]
+position = Vector2(-555, -500)
+
+[node name="Bank" parent="CityCenter/PropSpawner/Props" instance=ExtResource("6_y03tr")]
+position = Vector2(-557, -127)
+
+[node name="TrashBin" parent="CityCenter/PropSpawner/Props" instance=ExtResource("7_4cwl8")]
+position = Vector2(-561, -207)
 
 [node name="Bus" parent="." instance=ExtResource("2_gnykf")]
 
-[node name="CivilianSpawner" parent="." instance=ExtResource("4_hf7ru")]
-position = Vector2(385, -261)
+[node name="ActiveEffects" type="Node" parent="."]
 
-[node name="Civilian" parent="." instance=ExtResource("4_bouqf")]
-position = Vector2(359, 175)
-health = 100.0
-civilian_type = 0
-random_civilian_type = true
+[node name="PostEffects" type="CanvasLayer" parent="."]
+
+[node name="Vignette" type="TextureRect" parent="PostEffects"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_mane6")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="HUD" parent="." instance=ExtResource("8_uffiu")]

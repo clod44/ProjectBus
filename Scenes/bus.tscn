@@ -1,17 +1,58 @@
-[gd_scene load_steps=7 format=3 uid="uid://n7uju4c8xmpb"]
+[gd_scene load_steps=28 format=3 uid="uid://n7uju4c8xmpb"]
 
 [ext_resource type="Script" path="res://Scripts/vehicle.gd" id="1_mim82"]
 [ext_resource type="PackedScene" uid="uid://bi2msp4erewla" path="res://Scenes/Effects/trail.tscn" id="2_qeaf7"]
 [ext_resource type="Texture2D" uid="uid://c52tlngjxphnu" path="res://Assets/Textures/Wheels/wheel_1.png" id="2_vk1gw"]
 [ext_resource type="Texture2D" uid="uid://cjeaqcj5fygal" path="res://Assets/Textures/Vehicles/bus_1.png" id="3_uuxwl"]
+[ext_resource type="PackedScene" uid="uid://d3td61dkqiijk" path="res://Scenes/Effects/smoke_1.tscn" id="4_4patu"]
+[ext_resource type="Texture2D" uid="uid://4ifi3umd3ofu" path="res://Assets/Textures/Particles/smoke_07.png" id="4_owvhm"]
+[ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="6_4umc2"]
+[ext_resource type="Texture2D" uid="uid://cb20lrvd6j7b2" path="res://Assets/Textures/Particles/trace_01.png" id="6_cgwxy"]
+[ext_resource type="PackedScene" uid="uid://v22rd6yqh1k" path="res://Scenes/shadow_shader.tscn" id="7_gxf0d"]
+[ext_resource type="Texture2D" uid="uid://uvxp6pedvcc5" path="res://Assets/Textures/Particles/star_05.png" id="8_b4o5d"]
+[ext_resource type="Shader" path="res://Scenes/shadow.gdshader" id="8_oe86f"]
+[ext_resource type="PackedScene" uid="uid://dlih50kuee1hb" path="res://Scenes/engine.tscn" id="9_q3733"]
+[ext_resource type="PackedScene" uid="uid://bng6qsiwltdqg" path="res://Scenes/sound_manager.tscn" id="10_2qmgo"]
+[ext_resource type="PackedScene" uid="uid://b3gaqk8o5pybm" path="res://Scenes/sound_group.tscn" id="11_5bskc"]
+[ext_resource type="AudioStream" uid="uid://b2dbktahmldll" path="res://Assets/Sounds/Hits/metal_hit_1.mp3" id="12_tjbjf"]
+[ext_resource type="AudioStream" uid="uid://h2f03ufvqnjv" path="res://Assets/Sounds/Hits/metal_hit_2.mp3" id="13_kmuwy"]
+[ext_resource type="AudioStream" uid="uid://cvr13b6ihv1tb" path="res://Assets/Sounds/Hits/metal_hit_3.mp3" id="14_xtuj7"]
+[ext_resource type="AudioStream" uid="uid://02iblgxab6hf" path="res://Assets/Sounds/Hits/metal_hit_4.mp3" id="15_d440c"]
+[ext_resource type="AudioStream" uid="uid://durlsjlieiu0i" path="res://Assets/Sounds/Misc/metal_pipe.mp3" id="18_pvn06"]
+[ext_resource type="AudioStream" uid="uid://8luxsj2bido0" path="res://Assets/Sounds/Vehicle/wheel_screaming.mp3" id="19_7dnms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5e3w"]
 size = Vector2(91.625, 379.375)
 
+[sub_resource type="Gradient" id="Gradient_uchkc"]
+offsets = PackedFloat32Array(0, 0.92, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="Curve" id="Curve_clbhh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181564, 0.487544), 1.4269, 1.4269, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ke3t6"]
+offsets = PackedFloat32Array(0.089172, 0.140127, 1)
+colors = PackedColorArray(100, 0.35, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61jsn"]
+resource_local_to_scene = true
+shader = ExtResource("8_oe86f")
+shader_parameter/shadow_dir = Vector2(1, 0)
+shader_parameter/shadow_length = 5.0
+shader_parameter/shadow_color = Vector4(0, 0, 0, 0.5)
+shader_parameter/my_rotation = 0.0
+shader_parameter/sprite_texture = ExtResource("3_uuxwl")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_jj2l5"]
 radius = 196.499
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2amni"]
+polygon = PackedVector2Array(-44, 188, 44, 188, 44, -182, -43, -183)
+
 [node name="Bus" type="RigidBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 13
 mass = 1000.0
@@ -20,59 +61,221 @@ contact_monitor = true
 linear_damp = 1.0
 angular_damp = 5.0
 script = ExtResource("1_mim82")
-vehicle_speed = 1e+08
+vehicle_speed = 7e+07
 steer_strength = 1e+10
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_a5e3w")
 metadata/_edit_lock_ = true
 
-[node name="WheelFL" type="Sprite2D" parent="."]
+[node name="Wheels" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="WheelFL" type="Sprite2D" parent="Wheels"]
 position = Vector2(-41, -118)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
-[node name="Trail" parent="WheelFL" instance=ExtResource("2_qeaf7")]
+[node name="SmokeFL" parent="Wheels/WheelFL" instance=ExtResource("4_4patu")]
+emitting = false
+metadata/_edit_lock_ = true
+
+[node name="TireMarkFL" parent="Wheels/WheelFL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-is_visible = true
+emitting = true
+trail_length = 50
+trail_color = SubResource("Gradient_uchkc")
+use_delay_timer_instead = true
 
-[node name="WheelFR" type="Sprite2D" parent="."]
+[node name="WheelFR" type="Sprite2D" parent="Wheels"]
 position = Vector2(41, -118)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
-[node name="Trail" parent="WheelFR" instance=ExtResource("2_qeaf7")]
+[node name="SmokeFR" parent="Wheels/WheelFR" instance=ExtResource("4_4patu")]
+emitting = false
+metadata/_edit_lock_ = true
+
+[node name="TireMarkFR" parent="Wheels/WheelFR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-is_visible = true
+emitting = true
+trail_length = 50
+trail_color = SubResource("Gradient_uchkc")
+use_delay_timer_instead = true
 
-[node name="WheelBL" type="Sprite2D" parent="."]
+[node name="WheelBL" type="Sprite2D" parent="Wheels"]
 position = Vector2(-42, 108)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
-[node name="Trail" parent="WheelBL" instance=ExtResource("2_qeaf7")]
+[node name="SmokeBL" parent="Wheels/WheelBL" instance=ExtResource("4_4patu")]
+emitting = false
+metadata/_edit_lock_ = true
+
+[node name="TireMarkBL" parent="Wheels/WheelBL" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-is_visible = true
+emitting = true
+trail_length = 50
+trail_color = SubResource("Gradient_uchkc")
+use_delay_timer_instead = true
 
-[node name="WheelBR" type="Sprite2D" parent="."]
+[node name="WheelBR" type="Sprite2D" parent="Wheels"]
 position = Vector2(42, 108)
 scale = Vector2(4, 4)
 texture = ExtResource("2_vk1gw")
+metadata/_edit_lock_ = true
 
-[node name="Trail" parent="WheelBR" instance=ExtResource("2_qeaf7")]
+[node name="SmokeBR" parent="Wheels/WheelBR" instance=ExtResource("4_4patu")]
+emitting = false
+metadata/_edit_lock_ = true
+
+[node name="TireMarkBR" parent="Wheels/WheelBR" instance=ExtResource("2_qeaf7")]
 force_follow_parent = true
-is_visible = true
+emitting = true
+trail_length = 50
+trail_color = SubResource("Gradient_uchkc")
+use_delay_timer_instead = true
+
+[node name="Exhaust" type="CPUParticles2D" parent="."]
+position = Vector2(23, 175)
+amount = 100
+lifetime = 0.2
+lifetime_randomness = 0.48
+texture = ExtResource("4_owvhm")
+direction = Vector2(0, 1)
+spread = 9.37
+gravity = Vector2(0, 0)
+initial_velocity_min = 718.75
+initial_velocity_max = 833.33
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_clbhh")
+color = Color(0.203922, 0.203922, 0.203922, 1)
+color_ramp = SubResource("Gradient_ke3t6")
 
 [node name="Vehicle" type="Sprite2D" parent="."]
 z_index = 1
-rotation = -1.5708
 scale = Vector2(3, 3)
 texture = ExtResource("3_uuxwl")
+metadata/_edit_lock_ = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ShadowShader" parent="Vehicle" instance=ExtResource("7_gxf0d")]
+material = SubResource("ShaderMaterial_61jsn")
+shadow_length = 10.0
+update_shadows_from_this = true
+
+[node name="AreaTrigger" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 12
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger"]
 shape = SubResource("CircleShape2D_jj2l5")
+debug_color = Color(0.572549, 0.388235, 1, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_2amni")
+metadata/_edit_lock_ = true
+
+[node name="Lights" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="LeftHeadlight" type="PointLight2D" parent="Lights"]
+position = Vector2(-28, -193)
+rotation = -0.174533
+energy = 3.0
+shadow_enabled = true
+texture = ExtResource("6_cgwxy")
+texture_scale = 3.0
+metadata/_edit_lock_ = true
+
+[node name="RightHeadlight" type="PointLight2D" parent="Lights"]
+position = Vector2(28, -193)
+rotation = 0.174533
+energy = 3.0
+shadow_enabled = true
+texture = ExtResource("6_cgwxy")
+texture_scale = 3.0
+metadata/_edit_lock_ = true
+
+[node name="FrontHaze" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -188)
+texture = ExtResource("6_4umc2")
+texture_scale = 3.0
+metadata/_edit_lock_ = true
+
+[node name="RearLeftLight" type="PointLight2D" parent="Lights"]
+position = Vector2(-30, 193)
+color = Color(16.41, 1.56, 1.56, 1)
+texture = ExtResource("8_b4o5d")
+texture_scale = 0.1
+metadata/_edit_lock_ = true
+
+[node name="RearRightLight" type="PointLight2D" parent="Lights"]
+position = Vector2(29, 192)
+color = Color(16.41, 1.56, 1.56, 1)
+texture = ExtResource("8_b4o5d")
+texture_scale = 0.1
+metadata/_edit_lock_ = true
+
+[node name="Engine" parent="." instance=ExtResource("9_q3733")]
+
+[node name="SoundManager" parent="." instance=ExtResource("10_2qmgo")]
+metadata/_edit_lock_ = true
+
+[node name="HitSounds" parent="SoundManager" instance=ExtResource("11_5bskc")]
+group_name = "HitSounds"
+metadata/_edit_lock_ = true
+
+[node name="HitSound1" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("12_tjbjf")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="HitSound2" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("13_kmuwy")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="HitSound3" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("14_xtuj7")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="HitSound4" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("12_tjbjf")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="HitSound5" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("12_tjbjf")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="HitSound6" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("15_d440c")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="MetalPipe" type="AudioStreamPlayer2D" parent="SoundManager/HitSounds"]
+stream = ExtResource("18_pvn06")
+volume_db = -15.0
+max_polyphony = 5
+
+[node name="UtilSounds" parent="SoundManager" instance=ExtResource("11_5bskc")]
+group_name = "UtilSounds"
+
+[node name="WheelScreaming" type="AudioStreamPlayer2D" parent="SoundManager/UtilSounds"]
+stream = ExtResource("19_7dnms")
+volume_db = -10.0
+max_polyphony = 5

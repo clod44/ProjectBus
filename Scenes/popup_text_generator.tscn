@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://xwsdwlyk6uua"]
+
+[ext_resource type="Script" path="res://Scripts/popup_text_generator.gd" id="1_5gln7"]
+[ext_resource type="FontFile" uid="uid://dfrkok13dic02" path="res://Assets/Fonts/PixelMusketeer-vEXO.ttf" id="1_pkh27"]
+
+[node name="PopupTextGenerator" type="Label"]
+offset_left = -48.0
+offset_top = -13.0
+offset_right = 48.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_pkh27")
+theme_override_font_sizes/font_size = 36
+text = "Bottom Text
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_5gln7")
+
+[node name="EffectLength" type="Timer" parent="."]
+autostart = true

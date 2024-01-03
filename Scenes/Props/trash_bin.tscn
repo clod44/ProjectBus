@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7qo3qm5af0m"]
+
+[ext_resource type="PackedScene" uid="uid://cxai7vo4d3kvt" path="res://Scenes/prop.tscn" id="1_sd5ds"]
+[ext_resource type="Texture2D" uid="uid://qled2fwxn76e" path="res://Assets/Textures/Particles/light_04.png" id="2_tslei"]
+[ext_resource type="Texture2D" uid="uid://dmhisk6wcvo8p" path="res://Assets/Textures/Props/trashbin.png" id="3_4ic6r"]
+[ext_resource type="Texture2D" uid="uid://ca3j6vpnqhvr8" path="res://Assets/Textures/Props/trashbin_broken.png" id="4_7j787"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vr65i"]
+size = Vector2(14.6667, 14.375)
+
+[node name="TrashBin" type="Marker2D"]
+
+[node name="Prop" parent="." instance=ExtResource("1_sd5ds")]
+rotation = 1.5708
+mass = 50.0
+linear_damp = 5.0
+angular_damp = 12.0
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="Sprite2D" parent="Prop"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_tslei")
+metadata/_edit_lock_ = true
+
+[node name="SpriteNormal" type="Sprite2D" parent="Prop"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_4ic6r")
+metadata/_edit_lock_ = true
+
+[node name="SpriteDestroyed" type="Sprite2D" parent="Prop"]
+visible = false
+scale = Vector2(3, 3)
+texture = ExtResource("4_7j787")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Prop"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_vr65i")
+metadata/_edit_lock_ = true

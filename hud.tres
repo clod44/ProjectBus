@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c3g52o15bvdv7"]
+
+[ext_resource type="FontFile" uid="uid://dfrkok13dic02" path="res://Assets/Fonts/PixelMusketeer-vEXO.ttf" id="1_ki52d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_impg7"]
+
+[resource]
+default_font = ExtResource("1_ki52d")
+Button/styles/normal = SubResource("StyleBoxEmpty_impg7")
